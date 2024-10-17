@@ -12,7 +12,8 @@ const ExplorePage = () => {
   const { explore } = useParams(); // Destructure to get explore directly , means if we click on the tv then it will get the tv using parem and if we click on movie then it will take movie from param in explore we get the tv and movie when we console the param.
   const [pageNo, setPageNo] = useState(1);
   const [data, setData] = useState([]);
-  const { loading } = useFetchDetails(`/${params?.explore}/${params?.id}`)
+  // const { loading } = useFetchDetails(`/${params?.explore}/${params?.id}`)
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -22,6 +23,9 @@ const ExplorePage = () => {
       setData((prev) => [...prev, ...response.data.results]);
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -48,7 +52,7 @@ const ExplorePage = () => {
     };
   }, [debouncedHandleScroll]);
 
-  if (loading===true) {
+  if (loading) {
     return <div><ShimmerEffect/></div>
   }
 
