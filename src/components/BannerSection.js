@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import ShimmerEffect from '../shimmer/ShimmerEffect';
 
 const BannerSection = () => {
 
     const bannerData = useSelector(state => state.movieData.bannerData);
     const imageURL = useSelector(state => state.movieData.imageURL);
-    console.log(imageURL,"bannerdata");
+    // console.log(imageURL,"bannerdata");
 
     const [currentImage,setCurrentImage] = useState(0)
 
     const handleNext = ()=>{
         if(currentImage < bannerData.length - 1){
-            setCurrentImage(preve => preve + 1)
+            setCurrentImage(prev => prev + 1)
         }
     }
     const handleprevious = ()=>{
         if(currentImage > 0){
-            setCurrentImage(preve => preve - 1)
+            setCurrentImage(prev => prev - 1)
         }
     }
 
@@ -45,6 +46,7 @@ const BannerSection = () => {
                                 <div className='w-full h-full'>
                                     <img
                                         src={imageURL+data.backdrop_path}
+                                        alt='poster_image'
                                         className='h-full w-full object-cover'
                                     />
                                 </div>
